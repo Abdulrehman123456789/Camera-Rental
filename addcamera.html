@@ -1,0 +1,299 @@
+<html>
+<head>
+<title>CAMERADETAILS</title>
+<style type="text/css">
+.header {
+  background-color:green;
+  padding: 30px 20px;
+}
+
+
+
+.header h1.logo {
+  font-size: 30px;
+  font-weight: bold;
+  text-align:center;
+  color: #ffffff
+
+}
+
+body {
+
+
+background-color:#D0CA9C;
+
+}
+
+#h100{
+  text-align: center;
+}
+
+
+#demo{ position:absolute;
+left:1%;
+bottom:35%;}
+#f1{ position:absolute;
+left:1%;
+bottom:25%;}
+#h2{ position:absolute;
+left:40%;
+bottom:60%;
+color: green;
+}
+#t1{ position:absolute;
+left:60%;
+bottom:63%;
+height: 30px;
+}
+#h3{ position:absolute;
+left:40%;
+bottom:50%;
+color: green;
+}
+#t2{ position:absolute;
+left:60%;
+bottom:53%;
+height: 30px;
+}
+#h4{ position:absolute;
+left:40%;
+bottom:40%;
+color: green;
+}
+#h7{ position:absolute;
+left:20%;
+bottom:35%;
+color: green;
+}
+#h6{ position:absolute;
+left:20%;
+bottom:55%;
+color: green;
+}
+#t4{ position:absolute;
+left:20%;
+bottom:50%;
+height: 30px;
+}
+#c1{ position:absolute;
+left:60%;
+bottom:30%;}
+#c2{ position:absolute;
+left:20%;
+bottom:20%;}
+#h5{ position:absolute;
+left:40%;
+bottom:20%;
+color: green;
+}
+#t3{ position:absolute;
+left:60%;
+bottom:22%;
+height: 30px;
+}
+
+
+#b{
+ width:10%;
+ height: 50px; 
+ position: absolute;
+ background-color: #29a329;
+ color: #ffffff;
+ font-size:20px;
+ font-weight: bold;
+ bottom:5%;
+ left:30%; 
+ border-radius: 20px; }
+
+ #b1{ width:10%;
+ height: 50px; 
+ position: absolute;
+ background-color: #29a329;
+ color: #ffffff;
+ font-size: 20px;
+ bottom:5%;
+ left:60%; 
+ font-weight: bold;
+ border-radius: 20px; 
+   }  
+
+
+#b:hover{
+  background-color: green;
+  width:15%;
+  height: 80px; 
+  font-size:50px;
+
+}
+
+
+#b1:hover{
+  background-color: green;
+  width:15%;
+  height: 60px; 
+  font-size:25px;
+
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1  class="logo" >CAMERA RENTAL</h1>
+</div> 
+<h1 id="h100">DSLR DETAILS</h1>
+<img src="camera.png" id="demo" width='220px'>
+<input type="file" id="f1" onchange="changepic(event)">
+<h2  id="h2">DSLR NAME</h2>
+<input type="textbox" id="t1">
+<h2 id="h3">PRICE</h2>
+<input type="number" id="t2">
+<h2 id="h4">FULL DESCRIBTION</h2>
+<textarea rows='7' cols='30' id="c1"></textarea>
+<h2 id="h5">MODEL NUMBER</h2>
+<input type="textbox" id="t3">
+<h2 id="h6">COMPANY NAME</h2>
+<input type="textbox" id="t4">
+<h2 id="h7">LENCES</h2>
+<textarea rows='7' cols='30' id="c2"></textarea>
+
+<input type="button" id="b" value="SAVE" onclick="senddata(event)">
+<input type="button" id="b1" value="CANCEL" onclick="home()">
+<script>
+
+
+
+function home(event)
+{
+ window.open("file:///home/abdulrehman/camera%20rental/ownerhome.html","_self");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function senddata(event)
+{
+       var pageid=2;
+       var dname=document.getElementById("t1").value;
+       var price=document.getElementById("t2").value;
+       var fulldescription=document.getElementById("c1").value;
+       var model=document.getElementById("t3").value;
+       var campany=document.getElementById("t4").value;
+       var lences=document.getElementById("c2").value;
+       var ophone=localStorage["ph"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var file=document.getElementById("f1").files[0];
+        var reader = new FileReader();
+             
+             
+        reader.onloadend = function() {
+        var img=reader.result;
+             
+
+
+    
+       var fdata=pageid+"%"+dname+"$"+campany+"$"+model+"$"+ophone+"$"+lences+"$"+fulldescription+"$"+price+"$"+img;
+
+
+         var ws = new WebSocket("ws://127.0.0.1:5678/");        
+         ws.onopen=function() {
+               alert("connect");
+               ws.send(fdata);
+             }
+                        
+             
+         ws.onmessage=function(event)
+         {
+           var rdata=event.data;
+           if(rdata=="0")
+            { 
+               alert("UNABLE TO SAVE DSLR DETAIS");
+               window.open("file:///home/abdulrehman/camera%20rental/ownerhome.html","_self"); 
+              }
+           else{
+                alert("DSLR DETAILS SAVED");
+                window.open("file:///home/abdulrehman/camera%20rental/ownerhome.html","_self");
+                }
+        }
+        
+      
+        
+         
+            
+            }  
+
+
+   
+reader.readAsDataURL(file);  
+                     
+ 
+}    
+ 
+
+
+
+
+
+ function changepic(event)
+{            
+             var file=document.getElementById("f1").files[0];
+             var reader = new FileReader();
+
+     reader.onloadend = function() {
+     
+    document.getElementById("demo").remove();   
+    var x=document.createElement("IMG");
+    x.setAttribute("src",reader.result);
+    x.setAttribute("width","220");
+    x.setAttribute("height","200");
+    x.setAttribute("id","pic");
+    x.style.position="absolute";
+    x.style.left="1%";
+    x.style.bottom="35%";
+    document.body.appendChild(x);
+       
+                }
+                
+                
+            reader.readAsDataURL(file);  
+      }    
+
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<html>
+<title>ownerlogin</title> 
+<style type="text/css">
+  
+.header {
+  background-color:green;
+  padding: 30px 20px;
+}
+
+
+
+.header h1.logo {
+  font-size: 60px;
+  font-weight: bold;
+  text-align:center;
+  color: #ffffff
+
+}
+
+
+body {
+
+
+background-color: #D0CA9C;
+
+}
+
+
+
+  #h2{
+position: absolute;
+    bottom:58%; 
+    left: 45%}
+
+  #t1{width:20%; 
+    position: absolute;
+    bottom:50%;
+    height: 8%;
+    left:41%; 
+    text-align: center;
+    font-size: 30px;
+    border-radius: 20px;}
+
+  #p1{ width:20%; 
+    position: absolute;
+    bottom:38%;
+    height: 8%;
+    left:41%; 
+    border-radius: 20px;
+    text-align: center;
+    font-size: 30px;}
+
+    #b1{ width:20%;
+         height: 50px; 
+      position: absolute;
+      background-color: #768591;
+      color: #ffffff;
+      font-size: 20px;
+      bottom:20%;
+      left:55%; 
+      border-radius: 20px; }
+
+
+    #b2{ width:20%;
+         height: 50px; 
+      position: absolute;
+      background-color: #768591;
+      color: #ffffff;
+      font-size: 20px;
+      bottom:20%;
+      left: 25%; 
+      border-radius: 20px;}
+    
+</style> 
+<head>
+<body>
+
+ <div class="header">
+  <h1  class="logo" >CAMERA RENTAL</h1>
+  </div>
+
+
+<h1 id="h2">Login page </h1>
+<input type="number" id="t1"  placeholder="phone Number" />
+<input type="password" placeholder="password" id="p1"/>
+<input type="button" value="Login" id="b1" onclick="li(event)"/>
+<input type="button" value="Create New Account" id="b2" onclick="create(event)"/>
+  <script>
+  function li(event)
+{
+       var pageid=6;
+       var phoneno=document.getElementById("t1").value;
+       var password=document.getElementById("p1").value;
+       var epass=RSAencrp(password)
+       var fdata=pageid+"%"+phoneno+"$"+epass;
+      
+     
+       var ws = new WebSocket("ws://127.0.0.1:5678/");        
+         ws.onopen=function() {
+               alert("connect");
+               alert(fdata);
+               ws.send(fdata);
+             }
+             
+             
+             
+             
+             
+         ws.onmessage=function(event)
+         {
+           var rdata=event.data;
+           if(rdata=="0")
+            { alert("no such account");}
+           else if(rdata=="1"){
+               alert("login succesfull");
+               localStorage["ph"]=phoneno;
+               window.open("file:///home/abdulrehman/camera%20rental/ownerhome.html","_self");
+                }
+          else if(rdata=="2")
+             {
+             alert("wrong password please try again");
+             }
+        }
+        
+      
+ 
+ }
+
+ function RSAencrp(data)
+ { var puclickey=3;
+   var n=3127;
+   var encriptdata="";
+    //c=data^e mod n
+     for(var i=0 ; i<data.length;i++)
+     {
+      var asci=data.charCodeAt(i);
+      var a=Math.pow(parseInt(asci),puclickey);
+      var b=a%n;
+      encriptdata=encriptdata+b.toString()+"*";
+     } 
+
+    return(encriptdata);
+ }
+
+ function create(event)
+{
+ window.open("file:///home/abdulrehman/camera%20rental/owneraccountcreation.html","_self");
+}
+
+</script>
+</body>
+</html>

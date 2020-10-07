@@ -1,0 +1,449 @@
+<html>
+<head>
+<style type="text/css">
+
+.header {
+  background-color:green;
+  padding: 5px 10px;
+}
+
+
+
+.header h1.logo {
+  font-size: 60px;
+  font-weight: bold;
+  text-align:center;
+  color: #ffffff
+
+}
+
+body {
+
+
+background-color: #D0CA9C;
+
+}
+
+#h1{
+  text-align: center;
+}
+
+
+#b:hover{
+  background-color: green;
+  width:15%;
+  height: 80px; 
+  font-size:50px;
+
+}
+
+
+#b1:hover{
+  background-color: green;
+  width:15%;
+  height: 60px; 
+  font-size:25px;
+
+}
+
+ 
+    #b1{ width:10%;
+         height: 50px; 
+      position: absolute;
+      background-color: #29a329;
+      color: #ffffff;
+      font-size: 20px;
+      bottom:50%;
+      left:80%; 
+      font-weight: bold;
+      border-radius: 20px; }   
+
+</style>
+<title>SELECT CAMETA</title>
+</head>
+<body>
+<div class="header">
+<h1  class="logo" >CAMERA RENTAL</h1>
+</div> 
+<input type="button"  id="b1" value="BACK" onclick="back()"/>
+<h1 id="h1">SELECT CAMERA</h1>
+
+
+<script>
+
+
+var ws = new WebSocket("ws://127.0.0.1:5678/");       
+         ws.onopen=function() {
+               var district=localStorage["district"];
+               var pageid="55";
+               var sdata=pageid+"%"+district;
+               alert("connect");
+               ws.send(sdata);
+             }
+             
+             
+             
+         
+        
+ 
+ var datapresent=0;             
+ var c=0;            
+ var rdata=[];           
+ ws.onmessage=function(event)
+  {
+   rdata[c]=event.data;
+   c=c+1;
+ if(rdata[c-1]=="ok") 
+  {
+   
+   
+ if(rdata[0]=="ok")
+   {
+   alert("NO DSLA");
+   ws.close();
+   }        
+   else
+  {
+  datapresent=1;
+  ws.close();
+  }
+
+
+
+if(datapresent==1)
+{
+
+
+var count=0;
+var len=rdata.length;
+var len1=len;
+for(var i=0;i<=100000;i=i+60)
+{
+data2=rdata[count].split("$");
+var p1=document.createElement("p");
+var node=document.createTextNode("CAMERA NAME");
+p1.appendChild(node);
+p1.setAttribute("align","center");
+p1.setAttribute("id","t1");
+p1.style.position="absolute";
+p1.style.right="40%";
+var temp=i+35;
+var s=temp.toString();
+var f=s+"%";
+p1.style.top=f;
+p1.style.color="green";
+document.body.appendChild(p1);
+
+
+
+
+
+var p1v=document.createElement("p");
+var node=document.createTextNode(data2[0]);
+p1v.appendChild(node);
+p1v.setAttribute("align","center");
+p1v.setAttribute("id","t1");
+p1v.style.position="absolute";
+p1v.style.right="30%";
+var temp=i+35;
+var s=temp.toString();
+var f=s+"%";
+p1v.style.top=f;
+document.body.appendChild(p1v);
+
+
+
+
+
+
+var p2=document.createElement("p");
+var node=document.createTextNode("COMPANY NAME");
+p2.appendChild(node);
+p2.setAttribute("align","center");
+p2.setAttribute("id","t2");
+p2.style.position="absolute";
+p2.style.right="40%";
+var temp=i+45;
+var s=temp.toString();
+var f=s+"%";
+p2.style.top=f;
+p2.style.color="green";
+document.body.appendChild(p2);
+
+
+
+
+
+
+
+var p2v=document.createElement("p");
+var node=document.createTextNode(data2[1]);
+p2v.appendChild(node);
+p2v.setAttribute("align","center");
+p2v.setAttribute("id","t2");
+p2v.style.position="absolute";
+p2v.style.right="30%";
+var temp=i+45;
+var s=temp.toString();
+var f=s+"%";
+p2v.style.top=f;
+document.body.appendChild(p2v);
+
+
+
+
+
+
+
+var p3=document.createElement("p");
+var node=document.createTextNode("MODEL NO");
+p3.appendChild(node);
+p3.setAttribute("align","center");
+p3.setAttribute("id","t3");
+p3.style.position="absolute";
+p3.style.right="40%";
+var temp=i+55;
+var s=temp.toString();
+var f=s+"%";
+p3.style.top=f;
+p3.style.color="green";
+document.body.appendChild(p3);
+
+
+
+
+
+var p3v=document.createElement("div");
+var node=document.createTextNode(data2[2]);
+p3v.appendChild(node);
+p3v.setAttribute("align","center");
+p3v.setAttribute("id","t3");
+p3v.style.position="absolute";
+p3v.style.right="30%";
+var temp=i+57;
+var s=temp.toString();
+var f=s+"%";
+p3v.style.top=f;
+p3v.style.width="100px";
+p3v.style.overflow="auto";
+document.body.appendChild(p3v);
+
+
+
+
+
+
+
+
+var p4=document.createElement("p");
+var node=document.createTextNode("LENCES");
+p4.appendChild(node);
+p4.setAttribute("align","center");
+p4.setAttribute("id","t4");
+p4.style.position="absolute";
+p4.style.right="40%";
+var temp=i+65;
+var s=temp.toString();
+var f=s+"%";
+p4.style.top=f;
+p4.style.color="green";
+document.body.appendChild(p4);
+
+
+
+
+
+
+var p4v=document.createElement("div");
+var node=document.createTextNode(data2[3]);
+p4v.appendChild(node);
+p4v.setAttribute("align","center");
+p4v.setAttribute("id","t4");
+p4v.style.position="absolute";
+p4v.style.right="30%";
+var temp=i+67;
+var s=temp.toString();
+var f=s+"%";
+p4v.style.top=f;
+p4v.style.width="100px";
+p4v.style.overflow="auto";
+document.body.appendChild(p4v);
+
+
+
+
+
+
+
+
+var p5=document.createElement("p");
+var node=document.createTextNode("FULL DESC");
+p5.appendChild(node);
+p5.setAttribute("align","center");
+p5.setAttribute("id","t5");
+p5.style.position="absolute";
+p5.style.right="40%";
+var temp=i+75;
+var s=temp.toString();
+var f=s+"%";
+p5.style.top=f;
+p5.style.color="green";
+document.body.appendChild(p5);
+
+
+
+
+
+
+var p5v=document.createElement("div");
+var node=document.createTextNode(data2[4]);
+p5v.appendChild(node);
+p5v.setAttribute("align","center");
+p5v.setAttribute("id","t5");
+p5v.style.position="absolute";
+p5v.style.right="30%";
+var temp=i+75;
+var s=temp.toString();
+var f=s+"%";
+p5v.style.top=f;
+p5v.style.width="100px";
+p5v.style.overflow="auto";
+document.body.appendChild(p5v);
+
+
+
+
+
+
+var p6=document.createElement("p");
+var node=document.createTextNode("PRICE");
+p6.appendChild(node);
+p6.setAttribute("align","center");
+p6.setAttribute("id","t6");
+p6.style.position="absolute";
+p6.style.right="40%";
+var temp=i+85;
+var s=temp.toString();
+var f=s+"%";
+p6.style.top=f;
+p6.style.color="green";
+document.body.appendChild(p6);
+
+
+
+
+
+var p6v=document.createElement("div");
+var node=document.createTextNode(data2[5]);
+p6v.appendChild(node);
+p6v.setAttribute("align","center");
+p6v.setAttribute("id","t6");
+p6v.style.position="absolute";
+p6v.style.right="30%";
+var temp=i+87;
+var s=temp.toString();
+var f=s+"%";
+p6v.style.top=f;
+p6v.style.width="100px";
+p6v.style.overflow="auto";
+document.body.appendChild(p6v);
+
+
+
+
+var ophone=data2[7];
+var b=document.createElement("input");
+b.setAttribute("type","button");
+b.setAttribute("value","OWNER DETAILS");
+b.setAttribute("id",ophone);
+b.setAttribute("onclick","ownerprofile(event)");
+b.style.position="absolute";
+b.style.right="30%";
+var temp=i+95;
+var s=temp.toString();
+var f=s+"%";
+b.style.top=f;
+b.style.width="200px";
+b.style.height="70px";
+b.style.color="green";
+document.body.appendChild(b);
+
+
+
+
+
+
+
+
+
+
+
+
+var x=document.createElement("IMG");
+x.setAttribute("src",data2[6]);
+x.setAttribute("width","200");
+x.setAttribute("align","middle");
+x.setAttribute("height","200");
+x.setAttribute("id","pic");
+x.style.position="absolute";
+var temp=i+40;
+var s=temp.toString();
+var f=s+"%";
+x.style.right="55%";
+x.style.top=f;
+document.body.appendChild(x);
+
+
+
+
+if(count>len1-3)
+{
+break
+}
+else
+{
+count=count+1;
+}
+
+
+
+i=i+20;
+
+}
+}
+
+
+
+
+}
+}
+
+
+
+
+
+
+
+function back(event)
+{
+ window.open("file:///home/abdulrehman/camera%20rental/index.html","_self");
+}
+
+
+
+
+
+
+
+
+
+
+function ownerprofile(event)
+{
+var ophone=event.srcElement.id;
+localStorage["ph"]=ophone;
+window.open("file:///home/abdulrehman/camera%20rental/ownerdetails.html","_self");
+}
+</script>
+</body>
+</html>

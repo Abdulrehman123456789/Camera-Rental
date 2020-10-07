@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<title>INDEX</title>
+<style type="text/css">
+  
+.header {
+  background-color:green;
+  padding: 30px 20px;
+}
+
+
+
+.header h1.logo {
+  font-size: 60px;
+  font-weight: bold;
+  text-align:center;
+  color: #ffffff
+
+}
+
+
+body {
+
+
+background-color: #D0CA9C;
+
+}
+
+
+ #h2{
+position: absolute;
+    bottom:58%; 
+    left: 20%
+    }
+
+#h3{
+    position: absolute;
+    bottom:38%; 
+    left: 43%
+    }
+
+
+
+ #b{ width:20%;
+         height: 50px; 
+      position: absolute;
+      background-color: #768591;
+      color: #ffffff;
+      font-size: 20px;
+      bottom:15%;
+      left:41%; 
+      border-radius: 20px; }
+
+
+ #d{ width:40%;
+     height:50px; 
+     position: absolute;
+      background-color: green;
+      color: white
+      font-size: 20px;
+      bottom:5%;
+      left:31%; 
+      border-radius: 20px; }
+
+ #i1{width:20%; 
+    position: absolute;
+    bottom:30%;
+    height: 8%;
+    left:41%; 
+    text-align: center;
+    font-size: 30px;
+    border-radius: 20px;}
+
+
+
+</style>
+<head>
+<body>
+  <div class="header">
+  <h1  class="logo" >CAMERA RENTAL</h1>
+   </div>
+    <h2 id="h2">WELCOM TO THE PLACE WHICH WILL HELP YOU TO TRAP YOUR MEMORIES</h2>
+    <h3 id=h3>SELECT THE DISTRICT</h3>
+  <form>
+    <select id="i1">
+   <option>MYSORE</option>
+    <option>BANGALORE</option>
+     <option>MANDYA</option>
+    </select>
+    <input type=button value="SEARCH" id="b" onclick="search(event)" />
+     <input type=button value="RENT DSLR" id="d" onclick="login(event)" />
+    </form>
+   <script>
+  function search(event)
+{
+     
+       var district=document.getElementById("i1").value;
+       
+
+
+           localStorage["district"]=district;
+           window.open("file:///home/abdulrehman/camera%20rental/search.html","_self");
+          
+
+    }
+
+ function login(event) 
+{    
+      
+           window.open("file:///home/abdulrehman/camera%20rental/ownerlogin.html","_self");
+          
+
+    }
+   </script>
+   </body>
+   </html>     
